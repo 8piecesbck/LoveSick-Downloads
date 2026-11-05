@@ -7,11 +7,11 @@ and **LoveSick Loops** (loops and chop pads). Get just the one you want, or all 
 
 | | Mac (Apple Silicon and Intel, VST3 + AU) | Windows (VST3) |
 |---|---|---|
-| **LoveSick** (synth) | [LoveSick-Synth-Mac.zip](https://github.com/8piecesbck/LoveSick-Downloads/releases/latest/download/LoveSick-Synth-Mac.zip) | coming soon |
-| **efx LoveSick** | [LoveSick-efx-Mac.zip](https://github.com/8piecesbck/LoveSick-Downloads/releases/latest/download/LoveSick-efx-Mac.zip) | coming soon |
-| **LoveSick Vocals** | [LoveSick-Vocals-Mac.zip](https://github.com/8piecesbck/LoveSick-Downloads/releases/latest/download/LoveSick-Vocals-Mac.zip) | coming soon |
-| **LoveSick Loops** | [LoveSick-Loops-Mac.zip](https://github.com/8piecesbck/LoveSick-Downloads/releases/latest/download/LoveSick-Loops-Mac.zip) | coming soon |
-| **All four** | [LoveSick-Mac.zip](https://github.com/8piecesbck/LoveSick-Downloads/releases/latest/download/LoveSick-Mac.zip) | coming soon |
+| **LoveSick** (synth) | [LoveSick-Synth-Mac.zip](https://github.com/8piecesbck/LoveSick-Downloads/releases/latest/download/LoveSick-Synth-Mac.zip) | [LoveSick-Synth-Windows.zip](https://github.com/8piecesbck/LoveSick-Downloads/releases/latest/download/LoveSick-Synth-Windows.zip) |
+| **efx LoveSick** | [LoveSick-efx-Mac.zip](https://github.com/8piecesbck/LoveSick-Downloads/releases/latest/download/LoveSick-efx-Mac.zip) | [LoveSick-efx-Windows.zip](https://github.com/8piecesbck/LoveSick-Downloads/releases/latest/download/LoveSick-efx-Windows.zip) |
+| **LoveSick Vocals** | [LoveSick-Vocals-Mac.zip](https://github.com/8piecesbck/LoveSick-Downloads/releases/latest/download/LoveSick-Vocals-Mac.zip) | [LoveSick-Vocals-Windows.zip](https://github.com/8piecesbck/LoveSick-Downloads/releases/latest/download/LoveSick-Vocals-Windows.zip) |
+| **LoveSick Loops** | [LoveSick-Loops-Mac.zip](https://github.com/8piecesbck/LoveSick-Downloads/releases/latest/download/LoveSick-Loops-Mac.zip) | [LoveSick-Loops-Windows.zip](https://github.com/8piecesbck/LoveSick-Downloads/releases/latest/download/LoveSick-Loops-Windows.zip) |
+| **All four** | [LoveSick-Mac.zip](https://github.com/8piecesbck/LoveSick-Downloads/releases/latest/download/LoveSick-Mac.zip) | [LoveSick-Windows.zip](https://github.com/8piecesbck/LoveSick-Downloads/releases/latest/download/LoveSick-Windows.zip) |
 
 Older versions are on the [Releases](https://github.com/8piecesbck/LoveSick-Downloads/releases) page.
 
