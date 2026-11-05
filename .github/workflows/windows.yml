@@ -1,0 +1,84 @@
+# Builds the Windows installers from the private LoveSick code and adds them to a release here.
+#
+# - Runs only when started by hand (Actions > Build Windows > Run workflow), so only people with
+#   write access to this repo can run it. Copies of this repo don't get the key.
+# - The code is fetched with a read-only key, built on a temporary machine that is wiped
+#   afterwards, and never saved here. Only the finished zips are uploaded.
+# - The build output is hidden. If something fails, the log is encrypted with the certificate in
+#   .github/build-log-cert.pem, so only the owner's Mac can read it.
+name: Build Windows
+
+on:
+  workflow_dispatch:
+    inputs:
+      version:
+        description: "Version number (e.g. 0.1.5). The release v<version> must already exist."
+        required: true
+      ref:
+        description: "Branch or tag of the code to build"
+        required: true
+        default: "main"
+
+permissions:
+  contents: write
+
+jobs:
+  windows:
+    runs-on: windows-latest
+    steps:
+      - name: Get this repo (for the log certificate)
+        uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+
+      - name: Get the plugin code (read-only, not saved)
+        uses: actions/checkout@v4
+        with:
+          repository: 8piecesbck/LoveSick
+          ref: ${{ inputs.ref }}
+          ssh-key: ${{ secrets.LOVESICK_DEPLOY_KEY }}
+          persist-credentials: false
+          path: src
+
+      - name: Build the plugins (output hidden)
+        shell: pwsh
+        working-directory: src
+        run: |
+          cmake -B build -A x64 -DLOVESICK_COPY_AFTER_BUILD=OFF *> ..\build.log
+          if ($LASTEXITCODE -ne 0) { Write-Host "Setting up the build failed."; exit 1 }
+          cmake --build build --config Release --parallel --target LoveSick_VST3 EfxLoveSick_VST3 LoveSickVocals_VST3 LoveSickLoops_VST3 *>> ..\build.log
+          if ($LASTEXITCODE -ne 0) { Write-Host "Building the plugins failed."; exit 1 }
+          Write-Host "Plugins built."
+
+      - name: Make the installers
+        shell: pwsh
+        working-directory: src
+        run: |
+          choco install innosetup -y --no-progress *>> ..\build.log
+          $env:LOVESICK_VERSION = "${{ inputs.version }}"
+          try { & installer\windows\make_downloads.ps1 *>> ..\build.log } catch { Write-Host "Making the installers failed."; exit 1 }
+          Get-ChildItem dist\*.zip | ForEach-Object { Write-Host ("{0}  {1:N1} MB" -f $_.Name, ($_.Length / 1MB)) }
+
+      - name: Add them to the release
+        shell: pwsh
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh release upload "v${{ inputs.version }}" (Get-ChildItem src\dist\*.zip).FullName --repo "${{ github.repository }}" --clobber
+          if ($LASTEXITCODE -ne 0) { exit 1 }
+
+      - name: Lock the log (only if something failed)
+        if: failure()
+        shell: bash
+        run: |
+          [ -f build.log ] || echo "no log" > build.log
+          openssl cms -encrypt -binary -aes256 -in build.log -out build.log.enc -outform DER .github/build-log-cert.pem
+          rm -f build.log
+
+      - name: Keep the locked log
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: build-log-encrypted
+          path: build.log.enc
+          retention-days: 7
