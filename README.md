@@ -6,7 +6,7 @@ Four plugins in one installer: **LoveSick** (synth), **efx LoveSick** (effects),
 ## Download
 
 - **Mac** (Apple Silicon and Intel, VST3 + AU): [LoveSick-Mac.zip](https://github.com/8piecesbck/LoveSick-Downloads/releases/latest/download/LoveSick-Mac.zip)
-- **Windows** (VST3): [LoveSick-Windows.zip](https://github.com/8piecesbck/LoveSick-Downloads/releases/latest/download/LoveSick-Windows.zip)
+- **Windows** (VST3): coming soon
 
 Older versions are on the [Releases](https://github.com/8piecesbck/LoveSick-Downloads/releases) page.
 
